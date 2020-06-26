@@ -20,6 +20,11 @@ const Home = () => (
         <a>Perlin Noise</a>
       </Link>
     </h3>
+    <h3>
+      <Link href="/warpspeed">
+        <a>Warpspeed</a>
+      </Link>
+    </h3>
   </div>
 );
 
