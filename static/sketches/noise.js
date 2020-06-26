@@ -1,5 +1,10 @@
 import { palettes } from "../../lib/constants";
-import { pick, createGrid } from "../../lib/utils";
+import {
+  pick,
+  createGrid,
+  getCanvasDimension,
+  createSketchLayoutAndKnobs,
+} from "../../lib/utils";
 
 let controls = [
   {
@@ -95,93 +100,24 @@ let controls = [
     id: "redraw",
   },
 ];
-let inputsById = {};
-
-const getCanvasDimension = ({ width, height }) => {
-  const widthOffset = 500;
-  const heightOffset = 200;
-  const dimension = Math.min(width - widthOffset, height - heightOffset);
-  return dimension;
-};
-
-const createControlInput = (p, container, { id, label }) => {
-  const controlEl = p.createDiv();
-  controlEl.addClass("control");
-  controlEl.id(id);
-  const controlDisplay = p.createDiv();
-  controlDisplay.addClass("control__display");
-  container.child(controlEl);
-  controlEl.child(controlDisplay);
-  let labelElement = p.createDiv(label);
-  labelElement.addClass("label");
-  let currentValueElement = p.createDiv();
-  currentValueElement.addClass("currentValue");
-  controlDisplay.child(labelElement);
-  controlDisplay.child(currentValueElement);
-
-  return controlEl;
-};
 
 const sketch = (p) => {
   p.setup = () => {
     p.remove();
     p.noLoop();
     p.angleMode(p.RADIANS);
-
     p.windowHeight = window.innerHeight;
     p.windowWidth = window.innerWidth;
-
-    const dimension = getCanvasDimension({
-      width: p.windowWidth,
-      height: p.windowHeight,
+    const { sketchInputs } = createSketchLayoutAndKnobs(p, {
+      id: "noise",
+      controls,
     });
 
-    const container = p.createDiv();
-    container.addClass("container");
-    const canvas = p.createCanvas(dimension, dimension);
-    canvas.id("noise");
-    container.child(canvas);
-    const controlsContainer = p.createDiv();
-
-    controlsContainer.addClass("controls");
-    controlsContainer.style("min-height", dimension);
-    container.child(controlsContainer);
-
-    controls.forEach((control) => {
-      if (control.type === "SLIDER") {
-        const { min, max, label, id, defaultValue, step } = control;
-        const controlEl = createControlInput(p, controlsContainer, {
-          id,
-          label,
-        });
-
-        let slider = p.createSlider(min, max, defaultValue, step);
-        inputsById[id] = slider;
-        slider.input(() => p.redraw());
-        controlEl.child(slider);
-      } else if (control.type === "BUTTON") {
-        const { label } = control;
-        const button = p.createButton(label);
-        button.mouseClicked(() => {
-          p.redraw();
-        });
-        controlsContainer.child(button);
-      } else if (control.type === "COLOR") {
-        const { label, id, defaultValue } = control;
-        const controlEl = createControlInput(p, controlsContainer, {
-          id,
-          label,
-        });
-
-        const picker = p.createColorPicker(defaultValue);
-        picker.input(() => p.redraw());
-        inputsById[id] = picker;
-        controlEl.child(picker);
-      }
-    });
+    p.inputsById = sketchInputs;
   };
 
   p.draw = () => {
+    const { inputsById } = p;
     const SEED = inputsById.seed.value();
     p.noiseSeed(SEED);
     p.randomSeed(SEED);
@@ -258,29 +194,8 @@ const sketch = (p) => {
       width: p.windowWidth,
       height: p.windowHeight,
     });
-    console.log("ginna resize to ", dimension);
     p.resizeCanvas(dimension, dimension);
   };
 };
 
 export default sketch;
-
-// let noiseSketch;
-// noiseSketch = new p5(sketch);
-
-// window.View = new View();
-// View.setSketch(sketch);
-
-// document.addEventListener("turbolinks:load", function (e) {
-//   const body = document.querySelector("body");
-//   if (body.id === "noise") {
-//     if (!noiseSketch) {
-//       console.log("making a new one");
-//       noiseSketch = new p5(sketch);
-//     } else {
-//       console.log("using the old one");
-//       noiseSketch.setup();
-//       noiseSketch.draw();
-//     }
-//   }
-// });
