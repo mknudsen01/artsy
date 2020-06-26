@@ -9,7 +9,7 @@ const P5Wrapper = dynamic(import("react-p5-wrapper"), {
 
 const SketchLayout = ({ sketch, title }) => {
   return (
-    <>
+    <div className="content">
       <Head title={title} />
       <nav>
         <Link href="/">
@@ -17,8 +17,13 @@ const SketchLayout = ({ sketch, title }) => {
         </Link>
         <span>→ {title}</span>
       </nav>
-      <P5Wrapper sketch={sketch} />
-    </>
+      <section>
+        <P5Wrapper sketch={sketch} />
+      </section>
+      <footer>
+        Made by <a href="https://matthewknudsen.com"> Matthew</a> ✌️
+      </footer>
+    </div>
   );
 };
 
