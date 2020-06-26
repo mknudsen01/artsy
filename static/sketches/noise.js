@@ -4,6 +4,7 @@ import {
   createGrid,
   getCanvasDimension,
   createSketchLayoutAndKnobs,
+  displayControlValues,
 } from "../../lib/utils";
 
 let controls = [
@@ -122,11 +123,7 @@ const sketch = (p) => {
     p.noiseSeed(SEED);
     p.randomSeed(SEED);
 
-    controls.forEach((control) => {
-      const current = document.querySelector(`#${control.id} .currentValue`);
-      if (!current) return;
-      current.innerHTML = inputsById[control.id].value();
-    });
+    displayControlValues(controls, inputsById);
 
     const BACKGROUND_COLOR = inputsById.background.value();
     const COLOR_COUNT = inputsById.colorCount.value();
