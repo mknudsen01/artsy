@@ -131,6 +131,12 @@ let controls = [
     defaultValue: 360,
     step: 1,
   },
+  {
+    type: "SAVE",
+    label: "Save",
+    filename: "warpspeed",
+    id: "save",
+  },
 ];
 
 const sketch = (p) => {

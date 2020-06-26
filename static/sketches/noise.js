@@ -100,6 +100,12 @@ let controls = [
     label: "Redraw",
     id: "redraw",
   },
+  {
+    type: "SAVE",
+    label: "Save",
+    filename: "noise",
+    id: "save",
+  },
 ];
 
 const sketch = (p) => {
