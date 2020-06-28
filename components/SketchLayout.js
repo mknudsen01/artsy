@@ -17,7 +17,7 @@ const SketchLayout = ({ sketch, title }) => {
         </Link>
         <span>→ {title}</span>
       </nav>
-      <section>
+      <section className="sketch">
         <P5Wrapper sketch={sketch} />
       </section>
       <footer>

@@ -2,6 +2,23 @@ import React from "react";
 import Link from "next/link";
 import Head from "../components/head";
 
+const SketchExample = ({ title, id }) => {
+  return (
+    <div className="item">
+      <h3>
+        <Link href={`/${id}`}>
+          <a>{title}</a>
+        </Link>
+      </h3>
+      <Link href={`/${id}`}>
+        <a style={{ display: "flex" }}>
+          <img src={`/images/${id}.png`} />
+        </a>
+      </Link>
+    </div>
+  );
+};
+
 const Home = () => (
   <div className="content">
     <Head title="Home" />
@@ -17,16 +34,10 @@ const Home = () => (
         Below are a few examples, which I'll add to as I code up new algorithms.
         Check 'em out and holler at me with any cool designs you make. ✌️
       </p>
-      <h3>
-        <Link href="/noise">
-          <a>Perlin Noise</a>
-        </Link>
-      </h3>
-      <h3>
-        <Link href="/warpspeed">
-          <a>Warpspeed</a>
-        </Link>
-      </h3>
+      <div className="examples">
+        <SketchExample title="Perlin Noise" id="noise" />
+        <SketchExample title="Warpspeed" id="warpspeed" />
+      </div>
     </section>
     <footer>
       Made by <a href="https://matthewknudsen.com"> Matthew</a> ✌️
