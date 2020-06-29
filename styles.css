@@ -48,6 +48,7 @@ canvas {
   flex-direction: column;
   min-height: 400px;
   margin-left: 40px;
+  align-self: flex-start;
 }
 button,
 input[type="button"] {
@@ -65,6 +66,7 @@ input[type="color"] {
   display: flex;
   flex: 1 1 auto;
   flex-direction: column;
+  padding-top: 5px;
 }
 .control__display {
   display: flex;
@@ -114,13 +116,14 @@ footer a {
 .examples {
   display: flex;
   flex-flow: wrap;
+  justify-content: space-between;
 }
 
 .item {
   display: flex;
   flex-direction: column;
-  flex-basis: 33%;
-  padding-right: 30px;
+  flex-basis: 32%;
+  min-width: 320px;
 }
 
 .item img {
