@@ -37,6 +37,7 @@ const Home = () => (
       <div className="examples">
         <SketchExample title="Perlin Noise" id="noise" />
         <SketchExample title="Warpspeed" id="warpspeed" />
+        <SketchExample title="Doorway" id="doorway" />
       </div>
     </section>
     <footer>
