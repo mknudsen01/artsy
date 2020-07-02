@@ -25,14 +25,15 @@ const Home = () => (
     <section className="column">
       <h2>Computational Design experiments</h2>
       <p>
-        I've never put in the effort to learn how to paint well, design well,
-        draw well. But I'm still interested in making art. So, recently I've
-        been learning a little bit about generative art, using code to create
-        designs.
+        I currently haven't put in the necessary effort to paint or draw well,
+        buuuut I'm still interested in making art. Recently, I heard about
+        generative art - using code to create designs. With some math and bit of
+        randomness, it's possible to make some pretty cool looking designs - no
+        drawing ability required!
       </p>
       <p>
-        Below are a few examples, which I'll add to as I code up new algorithms.
-        Check 'em out and holler at me with any cool designs you make. ✌️
+        Below are a few examples, which I'll add to as I code up new ones. Check
+        'em out and holler at me with any cool designs you make.
       </p>
       <div className="examples">
         <SketchExample title="Perlin Noise" id="noise" />
